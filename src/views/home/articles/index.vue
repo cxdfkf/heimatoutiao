@@ -17,25 +17,15 @@
       <!-- {{channel_id}} -->
       <el-form-item label="频道列表：">
         <el-select placeholder="请选择" v-model="channel_id" @change="changeCondition">
-          <el-option
-            v-for="item in formdata.data"
-            :key="item.id"
-            :label="item.name"
-            :value="item.id"
-          ></el-option>
+          <el-option v-for="item in formdata.data" :key="item.id" :label="item.name"
+            :value="item.id"></el-option>
         </el-select>
       </el-form-item>
       <!-- {{formdata.date}} -->
       <!-- value-format  -->
       <el-form-item label="时间选择：">
-        <el-date-picker
-          @change="changeCondition"
-          v-model="formdata.date"
-          value-format="yyyy-MM-dd"
-          type="daterange"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-        ></el-date-picker>
+        <el-date-picker @change="changeCondition" v-model="formdata.date" value-format="yyyy-MM-dd"
+          type="daterange" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
       </el-form-item>
     </el-form>
     <div class="total">共找到{{page.total}}条符合条件的内容</div>
@@ -54,23 +44,18 @@
       </div>
       <!-- 右边样式 -->
       <div class="right">
-        <span class="xg">
+        <span class="xg" @click="editArticles(item.id.toString())">
           <i class="el-icon-edit"></i>修改
         </span>
-        <span class="del" @click="delArtical(item.id.toString())">
+        <span class="del" @click="delArticles(item.id.toString())">
           <i class="el-icon-delete"></i>删除
         </span>
       </div>
     </div>
     <el-row type="flex" justify="center">
-      <el-pagination
-        background
-        layout="prev, pager, next"
-        :total="page.total"
-        :paeg-size="page.pageSize"
-        :current-page="page.currentPage"
-        @current-change="getPage"
-      ></el-pagination>
+      <el-pagination background layout="prev, pager, next" :total="page.total"
+        :paeg-size="page.pageSize" :current-page="page.currentPage" @current-change="getPage">
+      </el-pagination>
     </el-row>
   </el-card>
 </template>
@@ -95,7 +80,10 @@ export default {
     }
   },
   methods: {
-    delArtical (id) {
+    editArticles (id) {
+      this.$router.push(`/home/publish/${id}`)
+    },
+    delArticles (id) {
       this.$confirm('您确定要删除吗？').then(res => {
         this.$http({ url: `/articles/${id}`, method: 'delete', params: { target: id } }).then(res => {
           this.queryContent()
@@ -223,8 +211,9 @@ export default {
     font-size: 12px;
     .xg {
       margin-right: 10px;
+      cursor: pointer;
     }
-    .del{
+    .del {
       cursor: pointer;
     }
   }

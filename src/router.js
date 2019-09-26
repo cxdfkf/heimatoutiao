@@ -38,6 +38,14 @@ export default new Router({
         {
           path: 'publish',
           component: () => import('./views/home/publish')
+        },
+        {
+          path: 'publish/:articlesId',
+          component: () => import('./views/home/publish')
+        },
+        {
+          path: 'account',
+          component: () => import('./views/home/account')
         }
       ]
     },
@@ -51,7 +59,7 @@ export default new Router({
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-  //     component: () => import(/* webpackChunkName: "about" */ './views/About.vue')// 按需加载
-  //   }
+    //     component: () => import(/* webpackChunkName: "about" */ './views/About.vue')// 按需加载
+    //   }
   ]
 })
